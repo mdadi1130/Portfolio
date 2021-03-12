@@ -1,0 +1,201 @@
+@import "mixins"
+/* Include relevant fonts */
+@include font-face(comfortaa, fonts/Comfortaa-Regular)
+@include font-face(montserrat-bold, fonts/Montserrat-ExtraBold)
+@include font-face(montserrat, fonts/Montserrat-Regular)
+@include font-face(b612, fonts/B612-Regular)
+@include font-face(b612-bold, fonts/B612-Bold)
+@include font-face(ibm-plex, fonts/IBMPlexSerif)
+// Color vars
+$color-primary: #4201FF
+$color-accent: #190061
+$gray: #57595D
+// Navbar vars
+$navbar-height: 7vh
+$navbar-animation: 0.5s ease forwards
+
+/*! Link highlight animation */
+%anim-highlight-slide
+  --initialBgColor: #000000
+  --initialTextColor: #4201FF
+
+  --slideBgColor: rgba(66, 1, 255, 0.5)
+  --slideTextColor: #FFFFFF
+
+  background-image: linear-gradient(90deg, var(--initialBgColor) 0%, var(--initialBgColor) 50%, var(--slideBgColor) 50%, var(--slideBgColor) 100%)
+  transition: background-position .3s cubic-bezier(.47, .1, 1, .63), color 0.2s linear
+  transition-delay: 0s, 0.15s
+  background-size: 200%
+/*! Enable smooth scroll */
+html
+  scroll-behavior: smooth
+/*! Body styling */
+body
+  /*! Enable flex */
+  display: flex
+  flex-direction: column
+  min-height: 100vh
+  margin: 0
+  /*! Set heading text color */
+  color: #FFFFFF
+  /*! Set line height */
+  line-height: 1.5
+/*! Set margins & flex value for main content */
+main
+  flex: 1
+  margin: 1em
+/*! Style sections as blocks and set padding */
+section
+  display: block
+  padding: 11.7vh 0
+/*! Fill landing page with intro section */
+#intro
+  min-height: 82.8vh
+  h1
+    font-size: 5vh
+  p
+    font-size: 3vh
+/*! Header font styling */
+h1, h2
+  font-family: montserrat-bold, sans-serif
+h2
+  position: relative
+/*! Style horizontal h2 header bar and align to right of h2 */
+h2:after
+  display: inline-block
+  position: absolute
+  height: 1px
+  margin-left: 20px
+  content: ""
+  background: $gray
+  top: 14px
+  width: 40%
+/*! H3 font styling */
+h3
+  font-family: montserrat, sans-serif
+/*! H4 font styling */
+h4
+  font-family: b612, sans-serif
+  color: $color-primary
+/*! Paragraph font styling */
+p
+  font-family: comfortaa, sans-serif
+  color: $gray
+
+/*! Link button styling */
+.styled-btn
+  padding: 0.75rem 1rem
+  border: 0.15vh solid $color-primary
+  border-radius: 4px
+  display: inline-flex
+  font-family: b612, sans-serif
+/*! Link styling */
+a
+  color: $color-primary
+  text-decoration: none
+  @extend %anim-highlight-slide
+/*! Slide animation on link hover */
+a:hover
+  color: var(--slideTextColor)
+  background-position: -100%
+
+/*! Navbar styling */
+nav
+  position: fixed
+  background-color: #000000
+  border-bottom: 0.25vh solid $color-accent
+  width: 100%
+  height: $navbar-height
+  line-height: $navbar-height - 3.18
+  top: 0
+  left: 0
+  overflow-x: hidden
+  z-index: 1
+  ul
+    list-style-type: none
+    margin: 0
+    padding: 0
+    overflow: hidden
+  /*! Border between home link & anchor links */
+  li:first-child
+    border-right: 1px solid $color-accent
+  /*! Float resume link to right */
+  li:last-child
+    float: right
+  /*! Float all other nav links to left */
+  li
+    float: left
+    /*! Style individual nav links */
+    a
+      display: inline-block
+      padding: 1.6vh 1.9vh
+      vertical-align: center
+      font-family: b612-bold, sans-serif
+
+/*! Collapsible nav bar animations */
+.collapse
+  animation: collapse $navbar-animation
+/*! Keyframe collapse animation */
+@keyframes collapse
+  0%
+    opacity: 1
+    top: 0
+  100%
+    opacity: 0
+    top: -$navbar-height
+
+.open
+  animation: open $navbar-animation
+/* Keyframe open animation */
+@keyframes open
+  0%
+    opacity: 0
+    top: -$navbar-height
+  100%
+    opacity: 1
+    top: 0
+
+/*! Style skills lists layouts */
+.skills-list
+  display: grid
+  grid-template-columns: 1fr 1fr
+  list-style-type: none
+  font-family: ibm-plex, sans-serif
+  width: 100%
+  line-height: 3.5vh
+
+/*! Align avatar image to right of 'about' section text block */
+.container
+  display: table
+.container__image
+  display: table-cell
+  horiz-align: right
+  position: relative
+  vertical-align: top
+  img
+    border-radius: 1vh
+.container__text
+  display: table-cell
+
+/*! Style project description boxes */
+.project-desc
+  background-color: $color-accent
+  padding: 2vh
+  color: #FFFFFF
+  width: 50%
+  z-index: 1
+
+/* Footer styling */
+footer
+  text-align: center
+  margin-bottom: 2vh
+  font-family: b612-bold, sans-serif
+
+/*! Particle background */
+#particles-js
+  position: fixed
+  z-index: -10
+  width: 100%
+  height: 100vh
+  background: #000000 50% 50%
+  background-size: cover

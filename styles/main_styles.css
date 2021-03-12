@@ -1,0 +1,263 @@
+/* Include relevant fonts */
+@font-face {
+  font-family: "comfortaa";
+  src: url("fonts/Comfortaa-Regular.eot?") format("eot"), url("fonts/Comfortaa-Regular.woff2") format("woff2"), url("fonts/Comfortaa-Regular.woff") format("woff"), url("fonts/Comfortaa-Regular.ttf") format("truetype"), url("fonts/Comfortaa-Regular.svg#comfortaa") format("svg");
+}
+@font-face {
+  font-family: "montserrat-bold";
+  src: url("fonts/Montserrat-ExtraBold.eot?") format("eot"), url("fonts/Montserrat-ExtraBold.woff2") format("woff2"), url("fonts/Montserrat-ExtraBold.woff") format("woff"), url("fonts/Montserrat-ExtraBold.ttf") format("truetype"), url("fonts/Montserrat-ExtraBold.svg#montserrat-bold") format("svg");
+}
+@font-face {
+  font-family: "montserrat";
+  src: url("fonts/Montserrat-Regular.eot?") format("eot"), url("fonts/Montserrat-Regular.woff2") format("woff2"), url("fonts/Montserrat-Regular.woff") format("woff"), url("fonts/Montserrat-Regular.ttf") format("truetype"), url("fonts/Montserrat-Regular.svg#montserrat") format("svg");
+}
+@font-face {
+  font-family: "b612";
+  src: url("fonts/B612-Regular.eot?") format("eot"), url("fonts/B612-Regular.woff2") format("woff2"), url("fonts/B612-Regular.woff") format("woff"), url("fonts/B612-Regular.ttf") format("truetype"), url("fonts/B612-Regular.svg#b612") format("svg");
+}
+@font-face {
+  font-family: "b612-bold";
+  src: url("fonts/B612-Bold.eot?") format("eot"), url("fonts/B612-Bold.woff2") format("woff2"), url("fonts/B612-Bold.woff") format("woff"), url("fonts/B612-Bold.ttf") format("truetype"), url("fonts/B612-Bold.svg#b612-bold") format("svg");
+}
+@font-face {
+  font-family: "ibm-plex";
+  src: url("fonts/IBMPlexSerif.eot?") format("eot"), url("fonts/IBMPlexSerif.woff2") format("woff2"), url("fonts/IBMPlexSerif.woff") format("woff"), url("fonts/IBMPlexSerif.ttf") format("truetype"), url("fonts/IBMPlexSerif.svg#ibm-plex") format("svg");
+}
+/*! Link highlight animation */
+a {
+  --initialBgColor: #000000;
+  --initialTextColor: #4201FF;
+  --slideBgColor: rgba(66, 1, 255, 0.5);
+  --slideTextColor: #FFFFFF;
+  background-image: linear-gradient(90deg, var(--initialBgColor) 0%, var(--initialBgColor) 50%, var(--slideBgColor) 50%, var(--slideBgColor) 100%);
+  transition: background-position 0.3s cubic-bezier(0.47, 0.1, 1, 0.63), color 0.2s linear;
+  transition-delay: 0s, 0.15s;
+  background-size: 200%;
+}
+
+/*! Enable smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/*! Body styling */
+body {
+  /*! Enable flex */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  /*! Set heading text color */
+  color: #FFFFFF;
+  /*! Set line height */
+  line-height: 1.5;
+}
+
+/*! Set margins & flex value for main content */
+main {
+  flex: 1;
+  margin: 1em;
+}
+
+/*! Style sections as blocks and set padding */
+section {
+  display: block;
+  padding: 11.7vh 0;
+}
+
+/*! Fill landing page with intro section */
+#intro {
+  min-height: 82.8vh;
+}
+#intro h1 {
+  font-size: 5vh;
+}
+#intro p {
+  font-size: 3vh;
+}
+
+/*! Header font styling */
+h1, h2 {
+  font-family: montserrat-bold, sans-serif;
+}
+
+h2 {
+  position: relative;
+}
+
+/*! Style horizontal h2 header bars and align to right of h2 */
+h2:after {
+  display: inline-block;
+  position: absolute;
+  height: 1px;
+  margin-left: 20px;
+  content: "";
+  background: #57595D;
+  top: 14px;
+  width: 40%;
+}
+
+/*! H3 font styling */
+h3 {
+  font-family: montserrat, sans-serif;
+}
+
+/*! H4 font styling */
+h4 {
+  font-family: b612, sans-serif;
+  color: #4201FF;
+}
+
+/*! Paragraph font styling */
+p {
+  font-family: comfortaa, sans-serif;
+  color: #57595D;
+}
+
+/*! Link button styling */
+.styled-btn {
+  padding: 0.75rem 1rem;
+  border: 0.15vh solid #4201FF;
+  border-radius: 4px;
+  display: inline-flex;
+  font-family: b612, sans-serif;
+}
+
+/*! Link styling */
+a {
+  color: #4201FF;
+  text-decoration: none;
+}
+
+/*! Slide animation on link hover */
+a:hover {
+  color: var(--slideTextColor);
+  background-position: -100%;
+}
+
+/*! Navbar styling */
+nav {
+  position: fixed;
+  background-color: #000000;
+  border-bottom: 0.25vh solid #190061;
+  width: 100%;
+  height: 7vh;
+  line-height: 3.82vh;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  z-index: 1;
+  /*! Border between home link & anchor links */
+  /*! Float resume link to right */
+  /*! Float all other nav links to left */
+}
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+nav li:first-child {
+  border-right: 1px solid #190061;
+}
+nav li:last-child {
+  float: right;
+}
+nav li {
+  float: left;
+  /*! Style individual nav links */
+}
+nav li a {
+  display: inline-block;
+  padding: 1.6vh 1.9vh;
+  vertical-align: center;
+  font-family: b612-bold, sans-serif;
+}
+
+/*! Collapsible nav bar animations */
+.collapse {
+  animation: collapse 0.5s ease forwards;
+}
+
+/*! Keyframe collapse animation */
+@keyframes collapse {
+  0% {
+    opacity: 1;
+    top: 0;
+  }
+  100% {
+    opacity: 0;
+    top: -7vh;
+  }
+}
+.open {
+  animation: open 0.5s ease forwards;
+}
+
+/* Keyframe open animation */
+@keyframes open {
+  0% {
+    opacity: 0;
+    top: -7vh;
+  }
+  100% {
+    opacity: 1;
+    top: 0;
+  }
+}
+/*! Style skills lists layouts */
+.skills-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  list-style-type: none;
+  font-family: ibm-plex, sans-serif;
+  width: 100%;
+  line-height: 3.5vh;
+}
+
+/*! Align avatar image to right of 'about' section text block */
+.container {
+  display: table;
+}
+
+.container__image {
+  display: table-cell;
+  horiz-align: right;
+  position: relative;
+  vertical-align: top;
+}
+.container__image img {
+  border-radius: 1vh;
+}
+
+.container__text {
+  display: table-cell;
+}
+
+/*! Style project description boxes */
+.project-desc {
+  background-color: #190061;
+  padding: 2vh;
+  color: #FFFFFF;
+  width: 50%;
+  z-index: 1;
+}
+
+/* Footer styling */
+footer {
+  text-align: center;
+  margin-bottom: 2vh;
+  font-family: b612-bold, sans-serif;
+}
+
+/*! Particle background */
+#particles-js {
+  position: fixed;
+  z-index: -10;
+  width: 100%;
+  height: 100vh;
+  background: #000000 50% 50%;
+  background-size: cover;
+}
+
+/*# sourceMappingURL=main_styles.css.map */
