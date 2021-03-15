@@ -20,14 +20,21 @@
     <div id="content">
         <nav id="navbar">
             <ul>
-                <li><a href="index.html">MD</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="assets/Resume.pdf" target="_blank">Resume</a></li>
+                <li><a class="nav-link" href="index.html">MD</a></li>
+                <li><a class="nav-link" href="#about">About</a></li>
+                <li><a class="nav-link" href="#experience">Experience</a></li>
+                <li><a class="nav-link" href="#projects">Projects</a></li>
+                <li><a class="nav-link" href="#contact">Contact</a></li>
+                <li><a class="nav-link" href="assets/Resume.pdf" target="_blank">Resume</a></li>
             </ul>
         </nav>
+<!--    Toggle light/dark mode -->
+        <input type="checkbox" id="switch" name="mode">
+        <label for="switch"></label>
+
+        <div class="tooltip">
+            <span class="tooltip-text">Switch between light & dark modes</span>
+        </div>
     <main>
         <section id="intro">
             <h1>Hi,</h1>

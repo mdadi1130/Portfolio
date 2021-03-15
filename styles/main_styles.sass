@@ -7,28 +7,44 @@
 @include font-face(b612-bold, fonts/B612-Bold)
 @include font-face(ibm-plex, fonts/IBMPlexSerif)
 // Color vars
-$color-primary: #4201FF
-$color-accent: #190061
+$color-bg: var(--color-bg)
+$color-navbar: var(--color-navbar)
+$color-primary: var(--color-primary)
+$color-accent: var(--color-accent)
+$color-text-heading: var(--color-text-heading)
+$color-text-body: var(--color-text-body)
 $gray: #57595D
 // Navbar vars
 $navbar-height: 7vh
 $navbar-animation: 0.5s ease forwards
 
-/*! Link highlight animation */
-%anim-highlight-slide
-  --initialBgColor: #000000
-  --initialTextColor: #4201FF
-
-  --slideBgColor: rgba(66, 1, 255, 0.5)
-  --slideTextColor: #FFFFFF
-
-  background-image: linear-gradient(90deg, var(--initialBgColor) 0%, var(--initialBgColor) 50%, var(--slideBgColor) 50%, var(--slideBgColor) 100%)
-  transition: background-position .3s cubic-bezier(.47, .1, 1, .63), color 0.2s linear
-  transition-delay: 0s, 0.15s
-  background-size: 200%
-/*! Enable smooth scroll */
+/*! Enable smooth scroll & set light theme */
 html
   scroll-behavior: smooth
+
+  --color-bg: #FFFFFF
+  --color-navbar: #36454F
+  --color-primary: #4201FF
+  --color-accent: #190061
+  --color-text-heading: #000000
+  --color-text-body: #05386B
+/*! Dark theme */
+html[data-theme='dark']
+  --color-bg: #000000
+  --color-navbar: #000000
+  --color-primary: #4201FF
+  --color-accent: #190061
+  --color-text-heading: #FFFFFF
+  --color-text-body: #C0C0C0
+
+/*! Link highlight animation */
+%anim-highlight-slide
+  --slideBgColor: rgba(66, 1, 255, 0.5)
+
+  background-image: linear-gradient(90deg, $color-bg 0%, $color-bg 50%, var(--slideBgColor) 50%, var(--slideBgColor) 100%)
+  transition: background-position 0.3s cubic-bezier(.47, .1, 1, .63), color 0.2s linear
+  transition-delay: 0s, 0.15s
+  background-size: 200%
 /*! Body styling */
 body
   /*! Enable flex */
@@ -36,8 +52,6 @@ body
   flex-direction: column
   min-height: 100vh
   margin: 0
-  /*! Set heading text color */
-  color: #FFFFFF
   /*! Set line height */
   line-height: 1.5
 /*! Set margins & flex value for main content */
@@ -48,6 +62,8 @@ main
 section
   display: block
   padding: 11.7vh 0
+  /*! Set heading text color */
+  color: $color-text-heading
 /*! Fill landing page with intro section */
 #intro
   min-height: 82.8vh
@@ -80,7 +96,7 @@ h4
 /*! Paragraph font styling */
 p
   font-family: comfortaa, sans-serif
-  color: $gray
+  color: $color-text-body
 
 /*! Link button styling */
 .styled-btn
@@ -96,20 +112,22 @@ a
   @extend %anim-highlight-slide
 /*! Slide animation on link hover */
 a:hover
-  color: var(--slideTextColor)
+  color: #FFFFFF
   background-position: -100%
 
 /*! Navbar styling */
 nav
   position: fixed
-  background-color: #000000
+  display: inline-block
+  background-color: $color-navbar
   border-bottom: 0.25vh solid $color-accent
   width: 100%
   height: $navbar-height
   line-height: $navbar-height - 3.18
   top: 0
   left: 0
-  overflow-x: hidden
+  overflow: hidden
+  margin-bottom: 15px
   z-index: 1
   ul
     list-style-type: none
@@ -125,8 +143,10 @@ nav
   /*! Float all other nav links to left */
   li
     float: left
+    background-color: $color-navbar
     /*! Style individual nav links */
     a
+      background-color: $color-navbar
       display: inline-block
       padding: 1.6vh 1.9vh
       vertical-align: center
@@ -154,6 +174,56 @@ nav
   100%
     opacity: 1
     top: 0
+
+/*! Theme slider */
+
+/*! Set slider container styling */
+label
+  height: 30px
+  width: 55px
+  cursor: pointer
+  background: $color-accent
+  margin-top: 11vh
+  margin-right: 5vw
+  float: right
+  display: flex
+  position: relative
+  justify-content: center
+  align-items: center
+  border-radius: 100px
+/*! Set slider toggle circle styling */
+label:after
+  content: ''
+  background: #FFFFFF
+  height: 20px
+  width: 20px
+  top: 5px
+  left: 4px
+  border-radius: 50%
+  position: absolute
+  transition: cubic-bezier(0.68, -0.55, 0.27, 01.55) 320ms
+/*! On slider checked */
+input:checked
+  /*! Set new container background */
+  + label
+    background: #FFBD07
+    /*! Animate slider */
+  + label:after
+      left: calc(100% - 5px)
+      transform: translateX(-100%)
+/*! Set checkbox invisible */
+input[type=checkbox]
+  height: 0
+  width: 0
+  visibility: hidden
+
+/*! Set transition */
+html.transition,
+html.transition *,
+html.transition *:before,
+html.transition *:after
+  transition: cubic-bezier(0.68, -0.55, 0.27, 01.55) 420ms !important
+  transition-delay: 0s !important
 
 /*! Style skills lists layouts */
 .skills-list
@@ -197,5 +267,5 @@ footer
   z-index: -10
   width: 100%
   height: 100vh
-  background: #000000 50% 50%
+  background: $color-bg 50% 50%
   background-size: cover

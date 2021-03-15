@@ -23,21 +23,34 @@
   font-family: "ibm-plex";
   src: url("fonts/IBMPlexSerif.eot?") format("eot"), url("fonts/IBMPlexSerif.woff2") format("woff2"), url("fonts/IBMPlexSerif.woff") format("woff"), url("fonts/IBMPlexSerif.ttf") format("truetype"), url("fonts/IBMPlexSerif.svg#ibm-plex") format("svg");
 }
+/*! Enable smooth scroll & set light theme */
+html {
+  scroll-behavior: smooth;
+  --color-bg: #FFFFFF;
+  --color-navbar: #36454F;
+  --color-primary: #4201FF;
+  --color-accent: #190061;
+  --color-text-heading: #000000;
+  --color-text-body: #05386B;
+}
+
+/*! Dark theme */
+html[data-theme=dark] {
+  --color-bg: #000000;
+  --color-navbar: #000000;
+  --color-primary: #4201FF;
+  --color-accent: #190061;
+  --color-text-heading: #FFFFFF;
+  --color-text-body: #C0C0C0;
+}
+
 /*! Link highlight animation */
 a {
-  --initialBgColor: #000000;
-  --initialTextColor: #4201FF;
   --slideBgColor: rgba(66, 1, 255, 0.5);
-  --slideTextColor: #FFFFFF;
-  background-image: linear-gradient(90deg, var(--initialBgColor) 0%, var(--initialBgColor) 50%, var(--slideBgColor) 50%, var(--slideBgColor) 100%);
+  background-image: linear-gradient(90deg, var(--color-bg) 0%, var(--color-bg) 50%, var(--slideBgColor) 50%, var(--slideBgColor) 100%);
   transition: background-position 0.3s cubic-bezier(0.47, 0.1, 1, 0.63), color 0.2s linear;
   transition-delay: 0s, 0.15s;
   background-size: 200%;
-}
-
-/*! Enable smooth scroll */
-html {
-  scroll-behavior: smooth;
 }
 
 /*! Body styling */
@@ -47,8 +60,6 @@ body {
   flex-direction: column;
   min-height: 100vh;
   margin: 0;
-  /*! Set heading text color */
-  color: #FFFFFF;
   /*! Set line height */
   line-height: 1.5;
 }
@@ -63,6 +74,8 @@ main {
 section {
   display: block;
   padding: 11.7vh 0;
+  /*! Set heading text color */
+  color: var(--color-text-heading);
 }
 
 /*! Fill landing page with intro section */
@@ -85,7 +98,7 @@ h2 {
   position: relative;
 }
 
-/*! Style horizontal h2 header bars and align to right of h2 */
+/*! Style horizontal h2 header bar and align to right of h2 */
 h2:after {
   display: inline-block;
   position: absolute;
@@ -105,19 +118,19 @@ h3 {
 /*! H4 font styling */
 h4 {
   font-family: b612, sans-serif;
-  color: #4201FF;
+  color: var(--color-primary);
 }
 
 /*! Paragraph font styling */
 p {
   font-family: comfortaa, sans-serif;
-  color: #57595D;
+  color: var(--color-text-body);
 }
 
 /*! Link button styling */
 .styled-btn {
   padding: 0.75rem 1rem;
-  border: 0.15vh solid #4201FF;
+  border: 0.15vh solid var(--color-primary);
   border-radius: 4px;
   display: inline-flex;
   font-family: b612, sans-serif;
@@ -125,27 +138,29 @@ p {
 
 /*! Link styling */
 a {
-  color: #4201FF;
+  color: var(--color-primary);
   text-decoration: none;
 }
 
 /*! Slide animation on link hover */
 a:hover {
-  color: var(--slideTextColor);
+  color: #FFFFFF;
   background-position: -100%;
 }
 
 /*! Navbar styling */
 nav {
   position: fixed;
-  background-color: #000000;
-  border-bottom: 0.25vh solid #190061;
+  display: inline-block;
+  background-color: var(--color-navbar);
+  border-bottom: 0.25vh solid var(--color-accent);
   width: 100%;
   height: 7vh;
   line-height: 3.82vh;
   top: 0;
   left: 0;
-  overflow-x: hidden;
+  overflow: hidden;
+  margin-bottom: 15px;
   z-index: 1;
   /*! Border between home link & anchor links */
   /*! Float resume link to right */
@@ -158,16 +173,18 @@ nav ul {
   overflow: hidden;
 }
 nav li:first-child {
-  border-right: 1px solid #190061;
+  border-right: 1px solid var(--color-accent);
 }
 nav li:last-child {
   float: right;
 }
 nav li {
   float: left;
+  background-color: var(--color-navbar);
   /*! Style individual nav links */
 }
 nav li a {
+  background-color: var(--color-navbar);
   display: inline-block;
   padding: 1.6vh 1.9vh;
   vertical-align: center;
@@ -205,6 +222,65 @@ nav li a {
     top: 0;
   }
 }
+/*! Theme slider */
+/*! Set slider container styling */
+label {
+  height: 30px;
+  width: 55px;
+  cursor: pointer;
+  background: var(--color-accent);
+  margin-top: 11vh;
+  margin-right: 5vw;
+  float: right;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+}
+
+/*! Set slider toggle circle styling */
+label:after {
+  content: "";
+  background: #FFFFFF;
+  height: 20px;
+  width: 20px;
+  top: 5px;
+  left: 4px;
+  border-radius: 50%;
+  position: absolute;
+  transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 320ms;
+}
+
+/*! On slider checked */
+input:checked {
+  /*! Set new container background */
+}
+input:checked + label {
+  background: #FFBD07;
+  /*! Animate slider */
+}
+input:checked + label:after {
+  left: calc(100% - 5px);
+  transform: translateX(-100%);
+}
+
+/*! Set checkbox invisible */
+input[type=checkbox] {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+/*! Set transition */
+html.transition,
+html.transition *,
+html.transition *:before,
+html.transition *:after {
+  transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 420ms !important;
+  transition-delay: 0s !important;
+}
+
 /*! Style skills lists layouts */
 .skills-list {
   display: grid;
@@ -236,7 +312,7 @@ nav li a {
 
 /*! Style project description boxes */
 .project-desc {
-  background-color: #190061;
+  background-color: var(--color-accent);
   padding: 2vh;
   color: #FFFFFF;
   width: 50%;
@@ -256,7 +332,7 @@ footer {
   z-index: -10;
   width: 100%;
   height: 100vh;
-  background: #000000 50% 50%;
+  background: var(--color-bg) 50% 50%;
   background-size: cover;
 }
 
