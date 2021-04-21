@@ -6,16 +6,16 @@ $(document).on("contextmenu",function(e) {
 // Collapsible nav bar
 
 // Initial scroll position
-var scrollState = 0;
-var navClasses = document.getElementById('navbar').classList;
+let scrollState = 0;
+let navClasses = document.getElementById('navbar').classList;
 //Return current scroll position
-var scrollTop = function () {
+let scrollTop = function () {
     return window.scrollY;
 }
 // On scroll event
-var scrollDetect = function(home, down, up) {
+let scrollDetect = function(home, down, up) {
     // Get current scroll position
-    var currentScroll = scrollTop();
+    let currentScroll = scrollTop();
     if (scrollTop() === 0) {
         home();
     }
@@ -46,24 +46,25 @@ window.addEventListener('scroll', function () {
 });
 
 // Toggle light/dark mode
-var checkbox = document.querySelector('input[type=checkbox]');
+let checkbox = document.querySelector('input[type=checkbox]');
 
 checkbox.addEventListener('change', function() {
-    if(this.checked) {
-        trans()
-        document.documentElement.setAttribute('data-theme', 'dark')
-    } else {
-        trans()
-        document.documentElement.setAttribute('data-theme', 'light')
+    document.body.classList.toggle("dark-theme");
+    let theme = "light";
+    if (document.body.classList.contains("dark-theme")) {
+        theme = "dark";
     }
-})
+    trans();
+    // Save theme preference in cookie
+    document.cookie = "theme=" + theme;
+});
 
 let trans = () => {
     document.documentElement.classList.add('transition');
     window.setTimeout(() => {
         document.documentElement.classList.remove('transition');
-    }, 1000)
-}
+    }, 1000);
+};
 
 // Particle background animation (json)
 particlesJS('particles-js',
